@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Star Star</title>
+	<script src="jquery-2.0.3.min.js"></script>
+	<script>
+
+	    $('document').ready(function() {
+		var c=document.getElementById("myCanvas");
+		var context=c.getContext("2d");
+
+		var cells = [];
+
+
+		for(var i=0; i<10; i++){
+		    cell = new Object();
+		    cell.x = 50+i*5;
+		    cell.y = 100+i*8;
+		    cells.push(cell);
+
+		}
+
+		drawCircleAlt(300, 300, 30);
+
+		function drawCircleAlt(x, y, cellSize){
+
+		    var numRings = 4;
+		    drawHex(x, y, cellSize);
+
+		    for(var curRing=1; curRing<numRings; curRing++){
+			var c = 2*cellSize*Math.sin(Math.PI/3);
+
+			var curX = x+c*curRing;
+			var curY = y;
+
+
+			var curDirX = c*Math.sin(Math.PI/6);
+			var curDirY = c*Math.cos(Math.PI/6);
+
+			for (var dir=0; dir<6; dir++){
+			    for (var curCell=0; curCell < curRing; curCell++){
+				if(dir == 0){
+				    context.strokeStyle = '#ff0000';
+				} else if(dir == 1) {
+				    context.strokeStyle = '#000000';
+				} else {
+				    context.strokeStyle = '#00f0f0';
+				}
+				drawHex(curX, curY, cellSize);
+				curX = curX + curDirX;
+				curY = curY + curDirY;
+			    }
+			    var tmpX = Math.cos(Math.PI/3)*curDirX - Math.sin(Math.PI/3)*curDirY;
+			    var tmpY = Math.sin(Math.PI/3)*curDirX + Math.cos(Math.PI/3)*curDirY;
+
+			    curDirX = tmpX;
+			    curDirY = tmpY;
+
+			}
+
+		    }
+
+		}
+
+		function drawCircle(x, y, cellSize){
+
+		    drawHex(x, y, cellSize);
+
+		    var c = 2*cellSize*Math.sin(Math.PI/3);
+		    var c2 = 2*cellSize*Math.sin(Math.PI/3)*Math.sin(Math.PI/3);
+
+		    for(var i=0; i<6; i++){
+			xp = x + c*Math.sin(i*Math.PI*2/6+Math.PI/6);
+			yp = y + c*Math.cos(i*Math.PI*2/6+Math.PI/6);
+			drawHex(xp, yp, cellSize);
+		    }
+
+		    var numElem = 12;
+
+		    for(var i=0; i<6; i++){
+			xp = x + 2*c*Math.sin(i*Math.PI*2/6+Math.PI/6);
+			yp = y + 2*c*Math.cos(i*Math.PI*2/6+Math.PI/6);
+			drawHex(xp, yp, cellSize);
+		    }
+		    
+		    for(var i=0; i<6; i++){
+			xp = x + 2*c2*Math.sin(i*Math.PI*2/6+Math.PI/3);
+			yp = y + 2*c2*Math.cos(i*Math.PI*2/6+Math.PI/3);
+			drawHex(xp, yp, cellSize);
+		    }
+		    //third ring
+
+		    for(var i=0; i<6; i++){
+			xp = x + 3*c*Math.sin(i*Math.PI*2/6+Math.PI/6);
+			yp = y + 3*c*Math.cos(i*Math.PI*2/6+Math.PI/6);
+			drawHex(xp, yp, cellSize);
+		    }
+
+		    for(var i=0; i<6; i++){
+			xp = x + 3.2*c2*Math.sin(i*Math.PI*2/6+Math.PI/4);
+			yp = y + 3.2*c2*Math.cos(i*Math.PI*2/6+Math.PI/4);
+			drawHex(xp, yp, cellSize);
+		    }
+
+
+
+		    
+
+
+		}
+
+		function drawHex(x, y, size){
+		    context.beginPath();
+
+		    context.moveTo(x, y+size);
+		    for(var i=1; i<6; i++){
+			xp = x + size*Math.sin(i*Math.PI*2/6);
+			yp = y + size*Math.cos(i*Math.PI*2/6);
+			context.lineTo(xp, yp);
+		    }
+		    context.closePath();
+		    context.stroke();
+		}
+
+
+
+		//context.lineTo(120, 50);
+		//context.stokeStyle="red";
+		//context.stroke();
+	    });
+
+	</script>
+    </head>
+    <body>
+        <h1>Star</h1>
+	<canvas id="myCanvas" width="1000" height="1000"> </canvas>
+	
+    </body>
+</html>
