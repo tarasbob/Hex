@@ -27,7 +27,7 @@
 
         var curCol = "red";
 
-        var sz = 5;
+        var sz = 2;
         for(var i = -sz; i <= sz; i++){
             for(var j = -sz; j <= sz; j++){
                 for(var k = -sz; k <= sz; k++){
@@ -43,8 +43,13 @@
                 }
             }
         }
-        context.fillStyle="green";
-        drawCell(0, 0, 0, 20);
+        //context.fillStyle="green";
+        //drawCell(0, 0, 0, 20);
+		
+		//--------------
+		
+		//-------------
+		
         context.fill();
 
         c.addEventListener('click', function(e){
@@ -89,6 +94,7 @@
 
         function drawCell(x, y, z, size){
             drawHex(centerX+size*Math.sqrt(3)*(x+z/2), centerY+(3/2)*z*size, size);
+			context.fill();
         }
 
 		function drawHex(x, y, size){
