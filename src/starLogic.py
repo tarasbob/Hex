@@ -71,7 +71,7 @@ class Game:
         diagnostic += getDiagnostic(self.grid)
 
         finished = False
-        iters = 2
+        iters = 10
         while iters > 0 and not finished:
             iters -= 1
             numWhiteGroups = 0

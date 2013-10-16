@@ -25,20 +25,23 @@
         var centerX = 500;
         var centerY = 500;
 
-        var curCol = "red";
+		var col1 = "4E7512";
+		var col2 = "6A51A1";
+		var colBlank = "F7D8B7";
+		var colMiddle = "7F4A13";
+        var curCol = col1;
 
-        var sz = 2;
+        var sz = 4;
         for(var i = -sz; i <= sz; i++){
             for(var j = -sz; j <= sz; j++){
                 for(var k = -sz; k <= sz; k++){
                     if(i + j + k == 0){
-                        if (Math.max(Math.abs(i), Math.abs(j), Math.abs(k)) % 2 == 0){
-                            context.fillStyle="red";
-                        } else {
-                            context.fillStyle="blue";
-                        }
-                        drawCell(i, j, k, 20);
-                        //context.fill();
+						if(i == 0 && j == 0 && k == 0){
+							context.fillStyle=colMiddle;
+						} else {
+							context.fillStyle=colBlank;
+						}
+						drawCell(i, j, k, 20);
                     }
                 }
             }
@@ -78,15 +81,14 @@
                 rz = -rx-ry;
             }
 
-
             if(Math.max(Math.abs(rx), Math.abs(ry), Math.abs(rz)) <= sz){
                 context.fillStyle=curCol;
                 drawCell(rx, ry, rz, size);
                 context.fill();
-                if(curCol == "red"){
-                    curCol = "blue";
+                if(curCol == col1){
+                    curCol = col2;
                 } else {
-                    curCol = "red";
+                    curCol = col1;
                 }
             }
 
